@@ -6,17 +6,17 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
-find_package(Qt6 COMPONENTS
-        Core
-        Gui
-        Widgets
-        REQUIRED)
+qt_standard_project_setup()
 
-add_executable(flood_it main.cpp)
-target_link_libraries(flood_it
-        Qt::Core
-        Qt::Gui
-        Qt::Widgets
+qt_add_executable(helloworld
+        main.cpp
 )
 
+target_link_libraries(helloworld PRIVATE Qt6::Widgets)
+
+set_target_properties(helloworld PROPERTIES
+        WIN32_EXECUTABLE ON
+        MACOSX_BUNDLE ON
+)
