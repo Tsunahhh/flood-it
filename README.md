@@ -1,5 +1,5 @@
 # Flood-It
-## Framework Used: Qt6
+## Framework Used: Qt6.7.2
 ## Architecture
 ```
 ./
