@@ -10,13 +10,23 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
 qt_standard_project_setup()
 
-qt_add_executable(helloworld
-        main.cpp
+qt_add_executable(floodit
+        src/controller/main.cpp
+        include/Grid.h
+        include/Game.h
+        include/Settings.h
+        src/model/Grid.cpp
+        src/model/Game.cpp
+        src/view/SetupView.cpp
+        include/SetupView.h
+        src/view/GameView.cpp
+        src/view/InfoGameView.cpp
+        include/Colors.h
 )
 
-target_link_libraries(helloworld PRIVATE Qt6::Widgets)
+target_link_libraries(floodit PRIVATE Qt6::Widgets)
 
-set_target_properties(helloworld PROPERTIES
+set_target_properties(floodit PROPERTIES
         WIN32_EXECUTABLE ON
         MACOSX_BUNDLE ON
 )
