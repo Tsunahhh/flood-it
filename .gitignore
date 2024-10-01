@@ -1,2 +1,132 @@
-cmake-build-debug/
+# Compiled files
+*.o
+*.obj
+*.so
+*.dll
+*.dylib
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Qt specific files
+*.qmake.stash
+*.qmake.cache
+*.pro.user
+*.pro.user.*
+moc_*.cpp
+ui_*.h
+qrc_*.cpp
+Makefile
+Makefile.Debug
+Makefile.Release
+*.prl
+
+# QtCreator specific
+*.autosave
+*.creator.user
+*.creator.user.*
+*.creator.cmake
+*.creator.shared
+
+# CLion specific
 .idea/
+cmake-build-*/
+CMakeLists.txt.user
+CMakeLists.txt.user.*
+*.iml
+*.ipr
+*.iws
+__pycache__/
+# Exclude CLion CMake output files
+CMakeCache.txt
+CMakeFiles/
+Testing/
+CTestTestfile.cmake
+cmake_install.cmake
+*.cmake
+compile_commands.json
+
+# VSCode specific
+.vscode/
+*.code-workspace
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+
+# General files to ignore
+*.log
+*.swp
+*.swo
+*.DS_Store
+*.directory
+*.bak
+*.tmp
+*.aux
+*.toc
+*.lock
+
+# Generated translations
+*.qm
+
+# Generated debug files
+*.dSYM/
+*.cproject
+*.project
+*.launch
+.ipch/
+*.pdb
+*.pch
+*.idb
+*.ilk
+*.aps
+*.ncb
+*.sdf
+*.suo
+*.ttf
+*.tlog
+*.VC.db
+*.VC.VC.opendb
+
+# Ignore all files without extensions (cpp compiled)
+*
+!*.*
+!*/
+!Doxyfile
+
+# pas de fichier *~
+*~
+
+# pas de dossier release
+release/
+
+# pas de dossier debug
+debug/
+
+# pas de dossier build-*
+build-*/
+
+# pas de fichier .user
+*.user
+
+# pas de fichier .user.*
+*.user.*
+
+# pas de fichier Makefile.*
+Makefile.*
+
+# pas de fichier .qmake.stash
+.qmake.stash
+
+# pas de fichier .pri
+.pri
+
+# pas de dossier.cmake
+.cmake/
+
+# pas de html
+*.htm
+*.html
