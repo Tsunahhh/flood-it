@@ -10,7 +10,7 @@
 
 namespace model {
     class Grid {
-    private:
+
         int _rows;
         int _cols;
         char _nbColors;
