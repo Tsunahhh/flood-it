@@ -5,6 +5,7 @@
 #ifndef GAMEVIEW_H
 #define GAMEVIEW_H
 
+#include <mutex>
 #include <QTableWidget>
 #include <QTableWidgetItem>
 #include <QBrush>
@@ -12,17 +13,23 @@
 #include <QHeaderView>
 #include <QMessageBox>
 
+#include "Game.h"
+
 namespace view {
     class GameView : public QTableWidget {
         Q_OBJECT
-            int _col;
-            int _row;
             int _WIDTH_WINDOW{500};
             int _HEIGHT_WINDOW{500};
-
+            int _col;
+            int _row;
+            model::Game *_game;
         public:
-            explicit GameView(QWidget *parent = nullptr);
-            GameView(QWidget *parent = nullptr, int row=5, int col=5);
+            explicit GameView(model::Game *game, QWidget *parent = nullptr, const int & row=5, const int & col=5);
+            QColor getQColor(const model::Color &color);
+            void setColor(const int & x, const int & y, const QColor &color);
+            void updateGameView();
+            ~GameView() override;
+
         private slots:
             void onCellClicked(int row, int column);
     };
