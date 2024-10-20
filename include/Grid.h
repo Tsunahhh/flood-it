@@ -11,19 +11,21 @@
 namespace model {
     class Grid {
 
-        unsigned _rows;
-        unsigned _cols;
-        unsigned _nbColors;
-        std::vector<std::vector<unsigned>> _grid;
+        int _rows;
+        int _cols;
+        int _nbColors;
+        std::vector<std::vector<Color>> _grid;
         void genGrid();
+        void reccChange(int x, int y, Color oldColor);
 
     public:
-        Grid(const unsigned & rows, const unsigned & cols, const unsigned & nbColors);
-        unsigned getColor(const unsigned & x, const unsigned & y) const;
+        Grid(const int & rows, const int & cols, const int & nbColors);
+        Color getColor(const int & x, const int & y) const;
         void playColor(Color color);
-        unsigned int getRows() const;
-        unsigned int getCols() const;
+        int getRows() const;
+        int getCols() const;
         bool isAllSame() const;
     };
 }
+
 #endif //GRID_H
