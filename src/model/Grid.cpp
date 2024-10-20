@@ -8,6 +8,8 @@
 #include <vector>
 #include <random>
 
+#include "Game.h"
+
 model::Grid::Grid(const int & rows, const int & cols, const int & nbColors) :
         _rows(rows), _cols(cols), _nbColors(nbColors)
 {
@@ -21,8 +23,8 @@ model::Color model::Grid::getColor(const int & x, const int & y) const {
 }
 
 void model::Grid::playColor(Color color) {
-    Color oldColor = _grid.at(0).at(0);
-
+    const Color oldColor = _grid.at(0).at(0);
+    reccChange(0, 0, oldColor, color);
 }
 
 int model::Grid::getCols() const {
@@ -61,11 +63,17 @@ void model::Grid::genGrid() {
             return Color(dis(gen));
         });
     });
+}
 
-    for (auto line : _grid) {
-        for (auto color : line) {
-            std::cout << color.value;
+void model::Grid::reccChange(int row, int col, Color oldColor, Color newColor) {
+    if (row >= 0 && row < _rows && col >= 0 && col < _cols) {
+        if (oldColor.getIdValue() == _grid.at(row).at(col).getIdValue()) {
+            _grid.at(row).at(col).value = newColor.value;
+            reccChange(row + 1, col, oldColor, newColor);
+            reccChange(row, col + 1, oldColor, newColor);
+            reccChange(row-1, col, oldColor, newColor);
+            reccChange(row, col-1, oldColor, newColor);
         }
-        std::cout << std::endl;
     }
 }
+

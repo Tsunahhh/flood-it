@@ -24,16 +24,20 @@ view::GameView::GameView(model::Game* game, QWidget *parent, const int & row, co
         setColumnWidth(i, _WIDTH_WINDOW / _col);
     }
 
-    updateGameView();
+    for (int i = 0; i < _row; i++) {
+        for (int j = 0; j < _col; j++) {
+            createColor(j, i, getQColor(_game->getColor(i, j)));
+        }
+    }
 
-    std::cout << "map loaded" << std::endl;
+    updateObs();
 
     connect(this, &QTableWidget::cellClicked, this, GameView::onCellClicked);
     setStyleSheet("QTableWidget { border: none; } QTableWidget::item { padding: 0; margin: 0;}");
 }
 
 void view::GameView::onCellClicked(int row, int col) {
-    //this->_game->play(col, row);
+    this->_game->play(col, row);
 }
 
 QColor view::GameView::getQColor(const model::Color & color) {
@@ -76,20 +80,49 @@ QColor view::GameView::getQColor(const model::Color & color) {
     return result;
 }
 
-void view::GameView::setColor(const int & x, const int & y, const QColor & color) {
+void view::GameView::createColor(const int &x, const int &y, const QColor &color) {
     if (y >= 0 && x >= 0 && y < _row && x < _col) {
-            auto *item = new QTableWidgetItem();
-            item->setBackground(QBrush(color));
-            setItem(y, x, item);
+        auto *item = new QTableWidgetItem();
+        item->setBackground(QBrush(color));
+        setItem(y, x, item);
     }
 }
 
+
+void view::GameView::setColor(const int & x, const int & y, const QColor & color) {
+    if (y >= 0 && x >= 0 && y < _row && x < _col) {
+        QTableWidgetItem *item = itemAt(x, y);
+        if (item == nullptr) {
+            createColor(x, y, color);
+        } else {
+            createColor(x, y, color);
+        }
+    };
+}
+
 void view::GameView::updateGameView() {
+    this->clear();
+    setRowCount(_row);
+    setColumnCount(_col);
+
+    for (int i = 0; i < _row; i++) {
+        setRowHeight(i, _HEIGHT_WINDOW / _row);
+    }
+
+    for (int i = 0; i < _col; i++) {
+        setColumnWidth(i, _WIDTH_WINDOW / _col);
+    }
+
+
     for (int i = 0; i < _row; i++) {
         for (int j = 0; j < _col; j++) {
-            setColor(j, i, getQColor(_game->getColor(i, j)));
+            createColor(j, i, getQColor(_game->getColor(j, i)));
         }
     }
+}
+
+void view::GameView::updateObs() {
+    updateGameView();
 }
 
 view::GameView::~GameView() {

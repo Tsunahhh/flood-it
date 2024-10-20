@@ -16,7 +16,7 @@ namespace model {
         int _nbColors;
         std::vector<std::vector<Color>> _grid;
         void genGrid();
-        void reccChange(int x, int y, Color oldColor);
+        void reccChange(int x, int y, Color oldColor, Color newColor);
 
     public:
         Grid(const int & rows, const int & cols, const int & nbColors);

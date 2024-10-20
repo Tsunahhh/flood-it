@@ -16,7 +16,7 @@
 #include "Game.h"
 
 namespace view {
-    class GameView : public QTableWidget {
+    class GameView : public QTableWidget, public utils::Observer {
         Q_OBJECT
             int _WIDTH_WINDOW{500};
             int _HEIGHT_WINDOW{500};
@@ -26,8 +26,10 @@ namespace view {
         public:
             explicit GameView(model::Game *game, QWidget *parent = nullptr, const int & row=5, const int & col=5);
             QColor getQColor(const model::Color &color);
+            void createColor(const int & x, const int & y, const QColor &color);
             void setColor(const int & x, const int & y, const QColor &color);
             void updateGameView();
+            void updateObs() override;
             ~GameView() override;
 
         private slots:
