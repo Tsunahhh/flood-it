@@ -6,7 +6,9 @@
 #define SETTINGS_H
 namespace model {
     struct Settings {
-
+        int width{10};
+        int height{10};
+        int colors{6};
     };
 }
 #endif //SETTINGS_H
