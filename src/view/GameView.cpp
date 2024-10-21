@@ -32,7 +32,7 @@ view::GameView::GameView(model::Game* game, QWidget *parent, const int & row, co
 
     updateObs();
 
-    connect(this, &QTableWidget::cellClicked, this, view::GameView::onCellClicked);
+    //connect(this, &QTableWidget::cellClicked, this, view::GameView::onCellClicked);
 
     setStyleSheet("QTableWidget { border: none; } QTableWidget::item { padding: 0; margin: 0;}");
 }

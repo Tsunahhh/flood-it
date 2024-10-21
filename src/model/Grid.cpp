@@ -4,7 +4,6 @@
 #include "Grid.h"
 
 #include <algorithm>
-#include <iostream>
 #include <vector>
 #include <random>
 
@@ -13,7 +12,6 @@
 model::Grid::Grid(const int & rows, const int & cols, const int & nbColors) :
         _rows(rows), _cols(cols), _nbColors(nbColors)
 {
-    std::cout << "Grid created" << std::endl;
     _grid = std::vector<std::vector<Color>>(rows, std::vector<Color>(cols, Color(0)));
     genGrid();
 }

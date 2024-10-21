@@ -7,7 +7,8 @@
 view::GameView2::GameView2(model::Game *game, QWidget *parent, const int &row, const int &col) :
     _game(game), QWidget(parent), _row(row), _col(col)
 {
-    this->setGeometry(QRect(0, 0, _WIDTH_WINDOW, _HEIGHT_WINDOW));
+    int max = (row > col) ? row : col;
+    this->setGeometry(QRect(0, 0, SIZE_WIN / max * col, SIZE_WIN / max * row));
     _gridLayout = new QGridLayout(this);
     _gridLayout->setContentsMargins(0, 0, 0, 0);
     _gridLayout->setSpacing(0);

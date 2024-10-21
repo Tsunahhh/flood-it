@@ -20,8 +20,8 @@ namespace view {
     class GameView2 : public QWidget, public utils::Observer {
         Q_OBJECT
 
-        int _WIDTH_WINDOW{800};
-        int _HEIGHT_WINDOW{800};
+        static const int SIZE_WIN{500};
+
 
         int _col;
         int _row;

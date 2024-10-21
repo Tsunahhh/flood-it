@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
 
-    const model::Settings settings = {26, 26, 10}; // limite 80x80
+    const model::Settings settings = {10, 10, 10}; // limite 80x80
 
     model::Game game{settings};
 
