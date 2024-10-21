@@ -18,8 +18,8 @@
 namespace view {
     class GameView : public QTableWidget, public utils::Observer {
         Q_OBJECT
-            int _WIDTH_WINDOW{500};
-            int _HEIGHT_WINDOW{500};
+            int _WIDTH_WINDOW{1080};
+            int _HEIGHT_WINDOW{1080};
             int _col;
             int _row;
             model::Game *_game;

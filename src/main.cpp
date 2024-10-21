@@ -5,6 +5,7 @@
 
 #include "Grid.h"
 #include "GameView.h"
+#include "GameView2.h"
 #include "Game.h"
 
 int main(int argc, char *argv[]) {
@@ -12,11 +13,11 @@ int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
 
-    const model::Settings settings = {5, 5, 10};
+    const model::Settings settings = {26, 26, 10}; // limite 80x80
 
     model::Game game{settings};
 
-    view::GameView view{ &game, nullptr, game.getRows(), game.getCols()};
+    view::GameView2 view{ &game, nullptr, game.getRows(), game.getCols()};
 
     game.addObserver(&view);
 

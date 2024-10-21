@@ -67,13 +67,14 @@ void model::Grid::genGrid() {
 
 void model::Grid::reccChange(int row, int col, Color oldColor, Color newColor) {
     if (row >= 0 && row < _rows && col >= 0 && col < _cols) {
-        if (oldColor.getIdValue() == _grid.at(row).at(col).getIdValue()) {
-            _grid.at(row).at(col).value = newColor.value;
-            reccChange(row + 1, col, oldColor, newColor);
-            reccChange(row, col + 1, oldColor, newColor);
-            reccChange(row-1, col, oldColor, newColor);
-            reccChange(row, col-1, oldColor, newColor);
+        if (newColor != oldColor) {
+            if (oldColor.getIdValue() == _grid.at(row).at(col).getIdValue()) {
+                _grid.at(row).at(col).value = newColor.value;
+                reccChange(row + 1, col, oldColor, newColor);
+                reccChange(row, col + 1, oldColor, newColor);
+                reccChange(row-1, col, oldColor, newColor);
+                reccChange(row, col-1, oldColor, newColor);
+            }
         }
     }
 }
-
