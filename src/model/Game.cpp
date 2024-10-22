@@ -26,6 +26,7 @@ model::Game::Game(const Settings & settings):
 void model::Game::play(const int &x, const int &y) {
     const Color selectedColor { _grid.getColor(x, y) };
     _grid.playColor(selectedColor);
+    _score++;
     notifyObserver();
 }
 
@@ -45,6 +46,20 @@ int model::Game::getCols() const {
     return _grid.getCols();
 }
 
+int model::Game::getScore() const {
+    return _score;
+}
+
+int model::Game::getMaxScore() const {
+    return _max_score;
+}
+bool model::Game::isFinished() const {
+    return _score >= _max_score;
+}
+bool model::Game::isAllPlaced() const {
+    return _grid.isAllSame();
+}
+
 void model::Game::addObserver(utils::Observer *obs) {
     _observers.insert(obs);
 }
@@ -58,8 +73,6 @@ void model::Game::notifyObserver() {
         obs->updateObs();
     }
 }
-
-
 
 
 

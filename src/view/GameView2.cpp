@@ -82,10 +82,6 @@ void view::GameView2::updateGameView() {
     }
 }
 
-void view::GameView2::updateObs() {
-    updateGameView();
-}
-
 view::GameView2::~GameView2() {
 
 };

@@ -11,13 +11,13 @@
 #include "GameView2.h"
 
 namespace view {
-    class MainWindow : public QMainWindow {
+    class MainWindow : public QMainWindow, public utils::Observer {
         Q_OBJECT
 
         QVBoxLayout * _verticalLayout;
         QWidget * _verticalWidget;
-        QHBoxLayout * _horizontalLayout;
-        QWidget * _horizontalWidget;
+
+        GameView2 * _gameView;
 
         model::Game* _game;
         model::Settings _settings;
@@ -26,6 +26,7 @@ namespace view {
         void playAGame();
         void settingsView();
         void gameOverView();
+        void updateObs() override;
         ~MainWindow();
     };
 }

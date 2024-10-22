@@ -3,14 +3,20 @@
 //
 #include "MainWindow.h"
 
-view::MainWindow::MainWindow(QWidget *parent) :
-_game(nullptr),
-_horizontalLayout(nullptr),
-_horizontalWidget(nullptr),
-_verticalLayout(nullptr),
-_verticalWidget(nullptr)
-{
+view::MainWindow::MainWindow(QWidget *parent):
+_game{nullptr},
+_settings{},
+_verticalLayout{nullptr},
+_verticalWidget{nullptr}
 
+{
+    setWindowTitle(tr("Flood It"));
+    setGeometry(QRect(0, 0, 1300, 690));
+    _verticalWidget = new QWidget(this);
+    _verticalLayout = new QVBoxLayout(_verticalWidget);
+    _verticalWidget->setLayout(_verticalLayout);
+    this->setCentralWidget(_verticalWidget);
+    playAGame();
 }
 
 view::MainWindow::~MainWindow() {
@@ -18,17 +24,34 @@ view::MainWindow::~MainWindow() {
 }
 
 void view::MainWindow::playAGame() {
-    const model::Settings settings = {26, 26, 10}; // limite 80x80
-    model::Game game{settings};
-    view::GameView2 view{ &game, nullptr, game.getRows(), game.getCols()};
-    game.addObserver(&view);
+    _settings = {15, 10, 10};
+    _game = new model::Game{_settings};
+    _gameView = new GameView2{ _game, _verticalWidget, _game->getRows(), _game->getCols()};
+    _verticalLayout->addWidget(_gameView);
+    _game->addObserver(this);
 }
 
 void view::MainWindow::gameOverView() {
-
+    if (_gameView) {
+        delete _gameView;
+        _gameView = nullptr;
+    }
+    if (_game) {
+        delete _game;
+        _game = nullptr;
+    }
 }
 
 void view::MainWindow::settingsView() {
 
+}
+
+void view::MainWindow::updateObs() {
+    if (_game && _gameView) {
+        _gameView->updateGameView();
+        if (_game->isAllPlaced()) {
+            exit(0);
+        }
+    }
 }
 

@@ -39,12 +39,15 @@ bool model::Grid::isAllSame() const {
     int currentCol = 1;
     bool allSame = true;
     while (currentRow < _grid.size()) {
-        while (currentCol < _grid.at(0).size()) {
-            if (pointer != getColor(currentRow, currentCol)) {
+
+        while (currentCol < _grid.at(currentRow).size()) {
+            if (pointer.value != getColor(currentCol, currentRow).value) {
                 allSame = false;
             }
             currentCol++;
         }
+
+        currentCol = 0;
         currentRow++;
     }
 

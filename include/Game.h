@@ -27,6 +27,10 @@ namespace model {
         Color getColor(const int & x, const int & y) const;
         int getRows() const;
         int getCols() const;
+        int getScore() const;
+        int getMaxScore() const;
+        bool isFinished() const;
+        bool isAllPlaced() const;
 
         void addObserver(utils::Observer *obs) override;
         void removeObserver(utils::Observer *obs) override;

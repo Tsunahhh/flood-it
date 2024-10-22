@@ -17,11 +17,10 @@
 
 
 namespace view {
-    class GameView2 : public QWidget, public utils::Observer {
+    class GameView2 : public QWidget {
         Q_OBJECT
 
         static const int SIZE_WIN{500};
-
 
         int _col;
         int _row;
@@ -35,7 +34,6 @@ namespace view {
         QColor getQColor(const model::Color &color);
         void setColor(const int & x, const int & y, const QColor &color);
         void updateGameView();
-        void updateObs() override;
         ~GameView2() override;
 
     private slots:
