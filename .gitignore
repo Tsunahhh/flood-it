@@ -46,8 +46,10 @@ CMakeCache.txt
 CMakeFiles/
 Testing/
 CTestTestfile.cmake
+.idea
 cmake_install.cmake
 *.cmake
+cmake-build-debug
 compile_commands.json
 
 # VSCode specific

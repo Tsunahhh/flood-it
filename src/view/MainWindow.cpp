@@ -47,11 +47,6 @@ void view::MainWindow::playAGame() {
 
         int max = (_settings.width > _settings.height) ? _settings.width : _settings.height;
 
-        /*QScreen *screen = QGuiApplication::primaryScreen();
-        QRect screenGeometry = screen->geometry();
-        int x = (screenGeometry.width() - GAME_SIZE) / 2;
-        int y = (screenGeometry.height() - GAME_SIZE) / 2;*/
-
         this->resize( GAME_SIZE / max * _settings.width, GAME_SIZE / max * _settings.height);
 
         _game = new model::Game{_settings};
