@@ -1,5 +1,5 @@
 #include <iostream>
-#include <ostream>
+
 
 #include "Grid.h"
 #include "Settings.h"
@@ -31,26 +31,28 @@ int model::Game::getCols() const {
     return _grid.getCols();
 }
 
-int model::Game::getScore() const {
-    return _settings.score;
-}
-
 bool model::Game::isAllPlaced() const {
     return _grid.isAllSame();
 }
 
 void model::Game::addObserver(utils::Observer *obs) {
-    _observers.insert(obs);
+    _observers.push_back(obs);
 }
 
 void model::Game::removeObserver(utils::Observer *obs) {
-    _observers.erase(obs);
+    std::ranges::remove_if(_observers, [obs](utils::Observer *o) {
+        return o == obs;
+    });
 }
 
 void model::Game::notifyObserver() {
     for (utils::Observer *obs : _observers) {
         obs->updateObs();
     }
+}
+
+model::Settings model::Game::getPlayerStates() const {
+    return _settings;
 }
 
 

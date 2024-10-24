@@ -6,6 +6,10 @@
 #define GAMEOVERVIEW_H
 
 #include <QWidget>
+#include <fstream>
+#include <vector>
+#include <iostream>
+#include <string>
 
 #include "SettingsView.h"
 
@@ -17,25 +21,28 @@
 // Leave
 
 namespace view {
-    class GameOverView : QWidget {
+    class GameOverView : public QWidget {
         Q_OBJECT
-            std::vector<model::Settings> states;
+            std::string FILE_PATH = "saves.bin";
 
+            std::vector<model::Settings> _states;
             QVBoxLayout *_layout;
-
             QHBoxLayout *_buttonLayout;
 
-            QLabel *_gameOverLBL; // Partie est finie !
-            QLabel *_scoreLBL;  // Votre score est : {SCORE}
-            QLabel *_recordLBL; // le record est {BESTSCORE} de {NAME}
+            QLabel *_gameOverLBL;
+            QLabel *_scoreLBL;
+            QLabel *_recordLBL;
 
             QPushButton *_replayBT;
             QPushButton *_settingBT;
             QPushButton *_leaveBT;
 
-            void getBestScore(const int & height, const int & width, const int & colors);
-            void loadScoresRecords(); // Récupérer les scores d'un fichier
-            void saveScoreRecords();  // Enregistrer les scores dans un fichier
+            model::Settings _settings;
+            model::Settings getBestScore();
+            void loadSettingsRecords(const std::string& filename);
+            void saveSettingsRecords(const std::string& filename);
+            model::Settings loadSettings(std::ifstream & inFile);
+            void saveSettings(std::ofstream &outFile);
 
         public:
             explicit GameOverView(model::Settings settings, QWidget *parent = nullptr);

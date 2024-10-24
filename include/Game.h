@@ -5,7 +5,8 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <set>
+#include <ostream>
+#include <algorithm>
 
 #include "Grid.h"
 #include "Observable.h"
@@ -16,14 +17,14 @@ namespace model {
 
         Settings _settings;
         Grid _grid;
-        std::set<utils::Observer*> _observers;
+        std::vector<utils::Observer*> _observers;
     public:
         explicit Game(const Settings & settings);
         void play(const int & x, const int & y);
         Color getColor(const int & x, const int & y) const;
         int getRows() const;
         int getCols() const;
-        int getScore() const;
+        model::Settings getPlayerStates() const;
         bool isAllPlaced() const;
 
         void addObserver(utils::Observer *obs) override;

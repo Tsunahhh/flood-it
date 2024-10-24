@@ -7,7 +7,6 @@
 view::SettingsView::SettingsView(QWidget *parent) :
 _settings{},
 _settingsLayout{new QGridLayout{this}},
-_pseudoLE{nullptr},
 _widthSB{nullptr},
 _heightSB{nullptr}
 {
@@ -21,8 +20,6 @@ void view::SettingsView::initLabels() {
     _settingsLBL = new QLabel("Settings", this);
     _settingsLBL->setStyleSheet("font-size: 30px; font-weight: bolder;");
     _settingsLayout->addWidget(_settingsLBL, 0, 0, 1, 2);
-    _pseudoLBL = new QLabel("Name: ", this);
-    _settingsLayout->addWidget(_pseudoLBL, 1, 0, 1, 1);
     _widthLBL = new QLabel("Width: ", this);
     _settingsLayout->addWidget(_widthLBL, 2, 0, 1, 1);
     _heightLBL = new QLabel("Height: ", this);
@@ -32,11 +29,6 @@ void view::SettingsView::initLabels() {
 }
 
 void view::SettingsView::initSettings() {
-    _pseudoLE = new QLineEdit(this);
-    _pseudoLE->setPlaceholderText(QString("pseudo"));
-    _pseudoLE->setText("guest");
-    _settingsLayout->addWidget(_pseudoLE, 1, 1, 1, 1);
-
     _widthSB = new QSpinBox(this);
     _widthSB->setValue(DEFAULT_WIDTH);
     _widthSB->setMinimum(MIN_SIZE);
@@ -67,7 +59,6 @@ void view::SettingsView::initSettings() {
 
 model::Settings view::SettingsView::getSettings() {
     return {
-        _pseudoLE->text().toStdString(),
         _widthSB->value(),
         _heightSB->value(),
         _colorsSB->value(),
@@ -77,10 +68,6 @@ model::Settings view::SettingsView::getSettings() {
 
 view::SettingsView::~SettingsView() {
 
-}
-
-void view::SettingsView::leave() {
-    exit(0);
 }
 
 
