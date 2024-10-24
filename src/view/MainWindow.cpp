@@ -1,6 +1,9 @@
 //
 // Created by tsuna on 21/10/2024.
 //
+
+#include <QScreen>
+
 #include "MainWindow.h"
 #include "SettingsView.h"
 
@@ -29,6 +32,7 @@ view::MainWindow::~MainWindow() {
 
 void view::MainWindow::settingsView() {
     _settingsView = new SettingsView(this);
+    connect(_settingsView, &SettingsView::play, this, &MainWindow::playAGame);
     _horizontalLayout->addWidget(_settingsView);
 }
 
@@ -37,9 +41,18 @@ void view::MainWindow::playAGame() {
     if (_settingsView) {
 
         _settings = _settingsView->getSettings();
+        _horizontalLayout->removeWidget(_settingsView);
+        delete _settingsView;
+        _settingsView = nullptr;
 
         int max = (_settings.width > _settings.height) ? _settings.width : _settings.height;
-        this->setGeometry(QRect(0, 0, GAME_SIZE / max * _settings.width, GAME_SIZE / max * _settings.height));
+
+        /*QScreen *screen = QGuiApplication::primaryScreen();
+        QRect screenGeometry = screen->geometry();
+        int x = (screenGeometry.width() - GAME_SIZE) / 2;
+        int y = (screenGeometry.height() - GAME_SIZE) / 2;*/
+
+        this->resize( GAME_SIZE / max * _settings.width, GAME_SIZE / max * _settings.height);
 
         _game = new model::Game{_settings};
         _gameView = new GameView{_game, _horizontalWidget, _game->getRows(), _game->getCols()};

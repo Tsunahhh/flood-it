@@ -11,14 +11,17 @@
 #include <QLineEdit>
 #include <QVBoxLayout>
 #include <QLabel>
+#include <QPushButton>
 
 #include "Settings.h"
 
 namespace view {
     class SettingsView : public QWidget {
+        Q_OBJECT
+
         static const int MAX_SIZE{80};
         static const int MIN_SIZE{2};
-        static const int DEFAULT_WIDTH{20};
+        static const int DEFAULT_WIDTH{10};
         static const int DEFAULT_HEIGHT{10};
         static const int MAX_COLORS{10};
         static const int MIN_COLORS{3};
@@ -32,18 +35,23 @@ namespace view {
         QLabel *_heightLBL;
         QLabel *_colorsLBL;
 
-
         QLineEdit *_pseudoLE;
         QSpinBox *_widthSB;
         QSpinBox *_heightSB;
         QSpinBox *_colorsSB;
 
+        QPushButton *_playBT;
+        QPushButton *_leaveBT;
     public:
         explicit SettingsView(QWidget *parent = nullptr);
-        void initSettings();
         void initLabels();
+        void initSettings();
+        void leave();
         model::Settings getSettings();
         ~SettingsView();
+    signals:
+        void play();
+
     };
 }
 

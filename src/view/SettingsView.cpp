@@ -33,13 +33,14 @@ void view::SettingsView::initLabels() {
 
 void view::SettingsView::initSettings() {
     _pseudoLE = new QLineEdit(this);
-    _pseudoLE->setPlaceholderText(QString("guest"));
+    _pseudoLE->setPlaceholderText(QString("pseudo"));
+    _pseudoLE->setText("guest");
     _settingsLayout->addWidget(_pseudoLE, 1, 1, 1, 1);
 
     _widthSB = new QSpinBox(this);
     _widthSB->setValue(DEFAULT_WIDTH);
     _widthSB->setMinimum(MIN_SIZE);
-    _widthSB->setMaximum(MIN_SIZE),
+    _widthSB->setMaximum(MAX_SIZE),
     _settingsLayout->addWidget(_widthSB, 2, 1, 1, 1);
 
     _heightSB = new QSpinBox(this);
@@ -53,6 +54,15 @@ void view::SettingsView::initSettings() {
     _colorsSB->setMinimum(MIN_COLORS);
     _colorsSB->setMaximum(MAX_COLORS);
     _settingsLayout->addWidget(_colorsSB, 4, 1, 1, 1);
+
+    _playBT = new QPushButton("Play", this);
+    _settingsLayout->addWidget(_playBT, 5, 0, 1, 1);
+    _leaveBT = new QPushButton("Leave", this);
+    _settingsLayout->addWidget(_leaveBT, 5, 1, 1, 1);
+
+    // Connect buttons with the methods
+    connect(_playBT, &QPushButton::clicked, this, &SettingsView::play);
+    connect(_leaveBT, &QPushButton::clicked, this, &SettingsView::leave);
 }
 
 model::Settings view::SettingsView::getSettings() {
@@ -67,6 +77,10 @@ model::Settings view::SettingsView::getSettings() {
 
 view::SettingsView::~SettingsView() {
 
+}
+
+void view::SettingsView::leave() {
+    exit(0);
 }
 
 
