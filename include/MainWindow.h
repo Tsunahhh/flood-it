@@ -6,18 +6,25 @@
 #define FLOOD_IT_MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QStackedWidget>
+#include <QStackedLayout>
 
 #include "Game.h"
-#include "GameView2.h"
+#include "GameView.h"
+#include "SettingsView.h"
 
 namespace view {
     class MainWindow : public QMainWindow, public utils::Observer {
         Q_OBJECT
 
-        QVBoxLayout * _verticalLayout;
-        QWidget * _verticalWidget;
+        static const int GAME_SIZE { 500 };
 
-        GameView2 * _gameView;
+        QHBoxLayout * _horizontalLayout;
+        QWidget * _horizontalWidget;
+
+        SettingsView *_settingsView;
+        GameView * _gameView;
+        //GameOver
 
         model::Game* _game;
         model::Settings _settings;

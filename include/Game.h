@@ -14,22 +14,16 @@
 namespace model {
     class Game : public utils::Observable {
 
-        int _score;
-        int _max_score;
         Settings _settings;
         Grid _grid;
         std::set<utils::Observer*> _observers;
-        void calculateMaxScore();
     public:
-        Game();
         explicit Game(const Settings & settings);
         void play(const int & x, const int & y);
         Color getColor(const int & x, const int & y) const;
         int getRows() const;
         int getCols() const;
         int getScore() const;
-        int getMaxScore() const;
-        bool isFinished() const;
         bool isAllPlaced() const;
 
         void addObserver(utils::Observer *obs) override;

@@ -1,47 +1,33 @@
 //
-// Created by tsuna on 24/09/24.
+// Created by tsuna on 21/10/2024.
 //
+#include <iostream>
 #include "GameView.h"
 
-#include <iostream>
+view::GameView::GameView(model::Game *game, QWidget *parent, const int &row, const int &col) :
+    _game(game), QWidget(parent), _row(row), _col(col)
+{
+    _gridLayout = new QGridLayout(this);
+    _gridLayout->setContentsMargins(0, 0, 0, 0);
+    _gridLayout->setSpacing(0);
 
-view::GameView::GameView(model::Game* game, QWidget *parent, const int & row, const int & col) : QTableWidget(parent), _col(col), _row(row), _game(game){
-
-    setRowCount(_row);
-    setColumnCount(_col);
-
-    setGeometry(QRect(0, 0, _WIDTH_WINDOW, _HEIGHT_WINDOW));
-    setEditTriggers(QAbstractItemView::NoEditTriggers);
-    setSelectionMode(QAbstractItemView::NoSelection);
-    horizontalHeader()->setVisible(false);
-    verticalHeader()->setVisible(false);
-
-    for (int i = 0; i < _row; i++) {
-        setRowHeight(i, _HEIGHT_WINDOW / _row);
+    _casesRegister.resize(row);
+    for (int i = 0; i < row; ++i) {
+        _casesRegister[i].resize(col);
     }
 
-    for (int i = 0; i < _col; i++) {
-        setColumnWidth(i, _WIDTH_WINDOW / _col);
-    }
-
-    for (int i = 0; i < _row; i++) {
-        for (int j = 0; j < _col; j++) {
-            createColor(j, i, getQColor(_game->getColor(i, j)));
+    for (int i = 0; i < _row; ++i) {
+        for (int j = 0; j < _col; ++j) {
+            CaseView* caseView = new CaseView(j, i, getQColor(_game->getColor(j, i)), this);
+            _casesRegister[i][j] = caseView;
+            connect(caseView, &CaseView::clicked, this, &GameView::onCellClicked);
+            _gridLayout->addWidget(caseView, i, j);
         }
     }
-
-    updateObs();
-
-    //connect(this, &QTableWidget::cellClicked, this, view::GameView::onCellClicked);
-
-    setStyleSheet("QTableWidget { border: none; } QTableWidget::item { padding: 0; margin: 0;}");
+    setLayout(_gridLayout);
 }
 
-void view::GameView::onCellClicked(int row, int col) {
-    this->_game->play(col, row);
-}
-
-QColor view::GameView::getQColor(const model::Color & color) {
+QColor view::GameView::getQColor(const model::Color &color) {
     QColor result;
     switch (color.getIdValue()) {
         case model::Color::RED:
@@ -81,53 +67,23 @@ QColor view::GameView::getQColor(const model::Color & color) {
     return result;
 }
 
-void view::GameView::createColor(const int &x, const int &y, const QColor &color) {
-    if (y >= 0 && x >= 0 && y < _row && x < _col) {
-        auto *item = new QTableWidgetItem();
-        item->setBackground(QBrush(color));
-        setItem(y, x, item);
-    }
-}
-
-
-void view::GameView::setColor(const int & x, const int & y, const QColor & color) {
-    if (y >= 0 && x >= 0 && y < _row && x < _col) {
-        QTableWidgetItem *item = itemAt(x, y);
-        if (item == nullptr) {
-            createColor(x, y, color);
-        } else {
-            createColor(x, y, color);
-        }
-    };
+void view::GameView::setColor(const int &x, const int &y, const QColor &color) {
+    _casesRegister.at(y).at(x)->setColor(color);
 }
 
 void view::GameView::updateGameView() {
-    this->clear();
-    setRowCount(_row);
-    setColumnCount(_col);
-
     for (int i = 0; i < _row; i++) {
-        setRowHeight(i, _HEIGHT_WINDOW / _row);
-    }
-
-    for (int i = 0; i < _col; i++) {
-        setColumnWidth(i, _WIDTH_WINDOW / _col);
-    }
-
-
-    for (int i = 0; i < _row; i++) {
-        for (int j = 0; j < _col; j++) {
-            createColor(j, i, getQColor(_game->getColor(j, i)));
+        for (int j =0; j < _col; j++) {
+            setColor(j, i, getQColor(_game->getColor(j, i)));
         }
     }
 }
 
-void view::GameView::updateObs() {
-    updateGameView();
-}
-
 view::GameView::~GameView() {
-    //delete _game;
-    //_game = nullptr;
+
+};
+
+void view::GameView::onCellClicked(int row, int col) {
+    _game->play(col, row);
 }
 
