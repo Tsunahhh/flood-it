@@ -8,29 +8,35 @@
 #include "SettingsView.h"
 
 view::MainWindow::MainWindow(QWidget *parent) :
-_game{nullptr},
-_gameView{nullptr},
-_gameOverView{nullptr},
-_settingsView{nullptr},
-_settings{},
-_horizontalLayout{nullptr},
-_horizontalWidget{nullptr}
-
+_settings{}
 {
     setWindowTitle(tr("Flood It"));
 
     _horizontalWidget = new QWidget(this);
     _horizontalLayout = new QHBoxLayout(_horizontalWidget);
     _horizontalWidget->setLayout(_horizontalLayout);
+    _horizontalLayout->setContentsMargins(0, 0, 0, 0);
 
     this->setCentralWidget(_horizontalWidget);
+
     connect(this, &MainWindow::signalGameOver, this, &MainWindow::gameOverView);
 
     settingsView();
 }
 
 view::MainWindow::~MainWindow() {
-
+    if (_game) {
+        delete _game;
+    }
+    if (_gameOverView) {
+        delete _gameOverView;
+    }
+    if (_settingsView) {
+        delete _settingsView;
+    }
+    if (_gameView) {
+        delete _gameView;
+    }
 }
 
 void view::MainWindow::settingsView() {
@@ -63,7 +69,7 @@ void view::MainWindow::playAGame() {
 
     int max = (_settings.width > _settings.height) ? _settings.width : _settings.height;
 
-    this->resize( GAME_SIZE / max * _settings.width, GAME_SIZE / max * _settings.height);
+    this->resize( (GAME_SIZE / max) * _settings.width, GAME_SIZE / max * _settings.height);
 
     _game = new model::Game{_settings};
     _gameView = new GameView{_game, _horizontalWidget, _game->getRows(), _game->getCols()};

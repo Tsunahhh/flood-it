@@ -31,11 +31,11 @@ namespace view {
 
         static const int SIZE_WIN{500}; ///< Fixed size of the game window.
 
-        int _col; ///< Number of columns in the game grid.
-        int _row; ///< Number of rows in the game grid.
+        const int _col; ///< Number of columns in the game grid.
+        const int _row; ///< Number of rows in the game grid.
 
-        model::Game *_game; ///< Pointer to the game logic model.
-        QGridLayout *_gridLayout; ///< Layout for the game's grid of cells.
+        model::Game *_game = nullptr; ///< Pointer to the game logic model.
+        QGridLayout *_gridLayout = nullptr; ///< Layout for the game's grid of cells.
 
         std::vector<std::vector<CaseView*>> _casesRegister; ///< Stores pointers to the CaseView objects representing the grid cells.
 
@@ -56,7 +56,7 @@ namespace view {
          * @param color The model::Color to be converted.
          * @return The corresponding QColor object.
          */
-        QColor getQColor(const model::Color &color);
+        QColor getQColor(const model::Color &color) const;
 
         /**
          * @brief Sets the color of a specific cell in the grid.
@@ -86,7 +86,7 @@ namespace view {
          * @param x The row index of the clicked cell.
          * @param y The column index of the clicked cell.
          */
-        void onCellClicked(int x, int y);
+        void onCellClicked(const int &x, const int &y);
     };
 }
 

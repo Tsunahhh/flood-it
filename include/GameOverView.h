@@ -30,17 +30,17 @@ namespace view {
         static constexpr  std::string FILE_PATH = "saves.bin"; ///< File path for saving/loading game records.
 
         std::vector<model::Settings> _states; ///< Stores game state records from past plays.
-        QVBoxLayout *_layout; ///< Vertical layout for arranging labels and buttons.
-        QWidget *_buttonWidget{}; ///< Widget for arranging buttons
-        QHBoxLayout *_buttonLayout{}; ///< Horizontal layout for arranging buttons.
+        QVBoxLayout *_layout = nullptr; ///< Vertical layout for arranging labels and buttons.
+        QWidget *_buttonWidget = nullptr; ///< Widget for arranging buttons
+        QHBoxLayout *_buttonLayout = nullptr; ///< Horizontal layout for arranging buttons.
 
-        QLabel *_gameOverLBL{}; ///< Label to display the "Game Over" message.
-        QLabel *_scoreLBL{}; ///< Label to display the player's score.
-        QLabel *_recordLBL{}; ///< Label to display the best score record.
+        QLabel *_gameOverLBL = nullptr; ///< Label to display the "Game Over" message.
+        QLabel *_scoreLBL = nullptr; ///< Label to display the player's score.
+        QLabel *_recordLBL = nullptr; ///< Label to display the best score record.
 
-        QPushButton *_replayBT{}; ///< Button to allow the player to replay with the same settings.
-        QPushButton *_settingBT{}; ///< Button to access the settings menu.
-        QPushButton *_leaveBT{}; ///< Button to leave the game.
+        QPushButton *_replayBT = nullptr; ///< Button to allow the player to replay with the same settings.
+        QPushButton *_settingBT = nullptr; ///< Button to access the settings menu.
+        QPushButton *_leaveBT = nullptr; ///< Button to leave the game.
 
         const model::Settings _settings; ///< The current game settings, including the player's score.
 
@@ -49,7 +49,7 @@ namespace view {
          *
          * @return The highest score for the current configuration.
          */
-        int getBestScore();
+        int getBestScore() const;
 
         /**
          * @brief Loads game settings records from a file.
@@ -87,7 +87,7 @@ namespace view {
          * @param settings The settings of the game just completed, including the player's score.
          * @param parent The parent widget, if any (optional).
          */
-        explicit GameOverView(model::Settings settings, QWidget *parent = nullptr);
+        explicit GameOverView(const model::Settings &settings, QWidget *parent = nullptr);
 
         /**
          * @brief Initializes the labels displayed on the game over screen.

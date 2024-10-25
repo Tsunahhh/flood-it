@@ -20,7 +20,7 @@ model::Color model::Grid::getColor(const int & x, const int & y) const {
     return _grid.at(y).at(x);
 }
 
-void model::Grid::playColor(Color color) {
+void model::Grid::playColor(const Color &color) {
     const Color oldColor = _grid.at(0).at(0);
     reccChange(0, 0, oldColor, color);
 }
@@ -66,7 +66,7 @@ void model::Grid::genGrid() {
     });
 }
 
-void model::Grid::reccChange(int row, int col, Color oldColor, Color newColor) {
+void model::Grid::reccChange(const int &row, const int &col, const Color &oldColor, const Color &newColor) {
     if (row >= 0 && row < _rows && col >= 0 && col < _cols) {
         if (newColor != oldColor) {
             if (oldColor.getIdValue() == _grid.at(row).at(col).getIdValue()) {

@@ -34,8 +34,8 @@ namespace view {
     class CaseView : public QWidget {
     Q_OBJECT
 
-        int _x; ///< x-coordinate of the tile.
-        int _y; ///< y-coordinate of the tile.
+        const int _x; ///< x-coordinate of the tile.
+        const int _y; ///< y-coordinate of the tile.
 
     public:
         /**
@@ -46,14 +46,14 @@ namespace view {
          * @param color The initial color of the tile.
          * @param parent The parent widget of the tile (can be nullptr).
          */
-        CaseView(int x, int y, const QColor & color, QWidget *parent = nullptr);
+        CaseView(const int & x, const int & y, const QColor & color, QWidget *parent = nullptr);
 
         /**
          * @brief Changes the color of the tile.
          *
          * @param color The new color to apply to the tile.
          */
-        void setColor(const QColor & color);
+        void setColor(const QColor &color);
 
     signals:
         /**
@@ -62,7 +62,7 @@ namespace view {
          * @param row The x-coordinate (row) of the tile.
          * @param col The y-coordinate (column) of the tile.
          */
-        void clicked(int row, int col);
+        void clicked(const int &row, const int &col);
 
     protected:
         /**

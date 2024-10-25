@@ -22,9 +22,9 @@ namespace model {
      */
     class Grid {
 
-        int _rows; ///< Number of rows in the grid.
-        int _cols; ///< Number of columns in the grid.
-        int _nbColors; ///< Number of different colors used in the grid.
+        const int _rows; ///< Number of rows in the grid.
+        const int _cols; ///< Number of columns in the grid.
+        const int _nbColors; ///< Number of different colors used in the grid.
         std::vector<std::vector<Color>> _grid; ///< 2D vector representing the grid's cells and their colors.
 
         /**
@@ -45,7 +45,7 @@ namespace model {
          * @param oldColor The initial color of the cell being changed.
          * @param newColor The new color to apply to the connected cells.
          */
-        void reccChange(int x, int y, Color oldColor, Color newColor);
+        void reccChange(const int &x, const int &y, const Color &oldColor, const Color &newColor);
 
     public:
         /**
@@ -74,7 +74,7 @@ namespace model {
          *
          * @param color The new Color to apply.
          */
-        void playColor(Color color);
+        void playColor(const Color &color);
 
         /**
          * @brief Returns the number of rows in the grid.

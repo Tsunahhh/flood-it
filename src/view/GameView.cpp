@@ -27,7 +27,7 @@ view::GameView::GameView(model::Game *game, QWidget *parent, const int &row, con
     setLayout(_gridLayout);
 }
 
-QColor view::GameView::getQColor(const model::Color &color) {
+QColor view::GameView::getQColor(const model::Color &color) const {
     QColor result;
     switch (color.getIdValue()) {
         case model::Color::RED:
@@ -83,7 +83,7 @@ view::GameView::~GameView() {
 
 };
 
-void view::GameView::onCellClicked(int row, int col) {
+void view::GameView::onCellClicked(const int &row, const int &col) {
     _game->play(col, row);
 }
 

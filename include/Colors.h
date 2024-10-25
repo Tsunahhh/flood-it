@@ -39,7 +39,7 @@ namespace model {
          *
          * @param value The integer value representing the color.
          */
-        Color(const int value) : value(value) {}
+        Color(const int & value) : value(value) {}
 
         /**
          * @brief Retrieves the integer ID of the color.

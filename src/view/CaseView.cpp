@@ -3,7 +3,7 @@
 //
 #include "CaseView.h"
 
-view::CaseView::CaseView(int x, int y, const QColor &color, QWidget *parent) :
+view::CaseView::CaseView(const int &x, const int &y, const QColor &color, QWidget *parent) :
         QWidget(parent), _x(x), _y(y)
 {
     setAutoFillBackground(true);

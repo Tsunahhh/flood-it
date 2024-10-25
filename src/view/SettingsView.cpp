@@ -5,9 +5,7 @@
 #include "SettingsView.h"
 
 view::SettingsView::SettingsView(QWidget *parent) :
-_settingsLayout{new QGridLayout{this}},
-_widthSB{nullptr},
-_heightSB{nullptr}
+_settingsLayout{new QGridLayout{this}}
 {
     initLabels();
     initSettings();
@@ -56,7 +54,7 @@ void view::SettingsView::initSettings() {
     connect(_leaveBT, &QPushButton::clicked, this, &SettingsView::leave);
 }
 
-model::Settings view::SettingsView::getSettings() {
+model::Settings view::SettingsView::getSettings() const {
     return {
         _widthSB->value(),
         _heightSB->value(),

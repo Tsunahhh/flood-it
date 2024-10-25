@@ -29,14 +29,14 @@ namespace view {
 
         static const int GAME_SIZE{500}; ///< The size of the game window.
 
-        QHBoxLayout *_horizontalLayout; ///< Layout to manage the arrangement of UI elements.
-        QWidget *_horizontalWidget; ///< Central widget for managing layouts.
+        QHBoxLayout *_horizontalLayout = nullptr; ///< Layout to manage the arrangement of UI elements.
+        QWidget *_horizontalWidget = nullptr; ///< Central widget for managing layouts.
 
-        SettingsView *_settingsView; ///< View to adjust game settings.
-        GameView *_gameView; ///< View for the game grid and gameplay.
-        GameOverView *_gameOverView; ///< View displayed when the game is over.
+        SettingsView *_settingsView = nullptr; ///< View to adjust game settings.
+        GameView *_gameView = nullptr; ///< View for the game grid and gameplay.
+        GameOverView *_gameOverView = nullptr; ///< View displayed when the game is over.
 
-        model::Game* _game; ///< Pointer to the game logic.
+        model::Game *_game = nullptr; ///< Pointer to the game logic.
         model::Settings _settings; ///< The current settings of the game.
 
     public:

@@ -6,7 +6,7 @@
 #include <utility>
 
 
-view::GameOverView::GameOverView(model::Settings settings, QWidget *parent) :
+view::GameOverView::GameOverView(const model::Settings &settings, QWidget *parent) :
 
 QWidget{parent},
 _settings{settings},
@@ -131,7 +131,7 @@ model::Settings view::GameOverView::loadSettings(std::ifstream &inFile) {
     return settings;
 }
 
-int view::GameOverView::getBestScore() {
+int view::GameOverView::getBestScore() const {
     if (_states.empty()) {
         return _settings.score;
     }

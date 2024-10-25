@@ -38,17 +38,17 @@ namespace view {
 
         QGridLayout *_settingsLayout;        ///< Layout for the settings widget.
 
-        QLabel *_settingsLBL;                ///< Label for the settings section.
-        QLabel *_widthLBL;                   ///< Label for the width input.
-        QLabel *_heightLBL;                  ///< Label for the height input.
-        QLabel *_colorsLBL;                  ///< Label for the colors input.
+        QLabel *_settingsLBL = nullptr;                ///< Label for the settings section.
+        QLabel *_widthLBL = nullptr;                   ///< Label for the width input.
+        QLabel *_heightLBL = nullptr;                  ///< Label for the height input.
+        QLabel *_colorsLBL = nullptr;                  ///< Label for the colors input.
 
-        QSpinBox *_widthSB;                  ///< Spin box for selecting width.
-        QSpinBox *_heightSB;                 ///< Spin box for selecting height.
-        QSpinBox *_colorsSB;                 ///< Spin box for selecting number of colors.
+        QSpinBox *_widthSB = nullptr;                  ///< Spin box for selecting width.
+        QSpinBox *_heightSB = nullptr;                 ///< Spin box for selecting height.
+        QSpinBox *_colorsSB = nullptr;                 ///< Spin box for selecting number of colors.
 
-        QPushButton *_playBT;                ///< Button to start the game.
-        QPushButton *_leaveBT;               ///< Button to exit the settings view.
+        QPushButton *_playBT = nullptr;                ///< Button to start the game.
+        QPushButton *_leaveBT = nullptr;               ///< Button to exit the settings view.
 
     public:
         /**
@@ -71,7 +71,7 @@ namespace view {
          * @brief Gets the current settings from the input fields.
          * @return The current settings configured by the user.
          */
-        model::Settings getSettings();
+        model::Settings getSettings() const;
 
         /**
          * @brief Destructor for the SettingsView class.
