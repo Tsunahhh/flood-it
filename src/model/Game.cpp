@@ -7,7 +7,7 @@
 
 model::Game::Game(const Settings & settings):
         _grid{settings.height,settings.width, settings.colors},
-        _settings(model::Settings())
+        _settings(settings)
 {
 }
 

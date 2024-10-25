@@ -36,7 +36,6 @@ namespace view {
         static const int MAX_COLORS{10};    ///< Maximum number of colors allowed.
         static const int MIN_COLORS{3};     ///< Minimum number of colors allowed.
 
-        const model::Settings _settings;          ///< The current settings for the game.
         QGridLayout *_settingsLayout;        ///< Layout for the settings widget.
 
         QLabel *_settingsLBL;                ///< Label for the settings section.

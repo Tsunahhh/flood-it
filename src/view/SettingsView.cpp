@@ -5,7 +5,6 @@
 #include "SettingsView.h"
 
 view::SettingsView::SettingsView(QWidget *parent) :
-_settings{},
 _settingsLayout{new QGridLayout{this}},
 _widthSB{nullptr},
 _heightSB{nullptr}

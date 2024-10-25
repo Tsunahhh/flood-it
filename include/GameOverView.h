@@ -27,7 +27,8 @@ namespace view {
     class GameOverView : public QWidget {
     Q_OBJECT
 
-        std::string FILE_PATH = "saves.bin"; ///< File path for saving/loading game records.
+        static constexpr  std::string FILE_PATH = "saves.bin"; ///< File path for saving/loading game records.
+
         std::vector<model::Settings> _states; ///< Stores game state records from past plays.
         QVBoxLayout *_layout; ///< Vertical layout for arranging labels and buttons.
         QWidget *_buttonWidget{}; ///< Widget for arranging buttons
@@ -41,7 +42,7 @@ namespace view {
         QPushButton *_settingBT{}; ///< Button to access the settings menu.
         QPushButton *_leaveBT{}; ///< Button to leave the game.
 
-        model::Settings _settings; ///< The current game settings, including the player's score.
+        const model::Settings _settings; ///< The current game settings, including the player's score.
 
         /**
          * @brief Retrieves the best score from the recorded states that match the current game's settings.
@@ -77,7 +78,7 @@ namespace view {
          *
          * @param outFile The output file stream to write to.
          */
-        void saveSettings(std::ofstream &outFile);
+        void saveSettings(std::ofstream &outFile, const model::Settings &settings);
 
     public:
         /**

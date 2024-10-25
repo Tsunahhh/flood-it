@@ -65,6 +65,31 @@ void view::GameOverView::initBTN() {
     _layout->addWidget(_buttonWidget);
 }
 
+
+void view::GameOverView::saveSettingsRecords(const std::string& filename) {
+    std::ofstream outFile(filename, std::ios::binary);
+    if (!outFile) {
+        std::cerr << "Erreur lors de l'ouverture du fichier !" << std::endl;
+        return;
+    }
+
+    size_t size = _states.size();
+    outFile.write(reinterpret_cast<const char*>(&size), sizeof(size));
+
+    for (const auto& settings : _states) {
+        saveSettings(outFile, settings);
+    }
+
+    outFile.close();
+}
+
+void view::GameOverView::saveSettings(std::ofstream &outFile, const model::Settings &settings) {
+    outFile.write(reinterpret_cast<const char*>(&settings.width), sizeof(settings.width));
+    outFile.write(reinterpret_cast<const char*>(&settings.height), sizeof(settings.height));
+    outFile.write(reinterpret_cast<const char*>(&settings.colors), sizeof(settings.colors));
+    outFile.write(reinterpret_cast<const char*>(&settings.score), sizeof(settings.score));
+}
+
 void view::GameOverView::loadSettingsRecords(const std::string& filename) {
     std::ifstream inFile(filename, std::ios::binary);
     if (!inFile) {
@@ -85,23 +110,6 @@ void view::GameOverView::loadSettingsRecords(const std::string& filename) {
     inFile.close();
 }
 
-void view::GameOverView::saveSettingsRecords(const std::string& filename) {
-    std::ofstream outFile(filename, std::ios::binary);
-    if (!outFile) {
-        std::cerr << "Erreur lors de l'ouverture du fichier !" << std::endl;
-        return;
-    }
-
-    size_t size = _states.size();
-    outFile.write(reinterpret_cast<const char*>(&size), sizeof(size));
-
-    for (const auto& settings : _states) {
-        saveSettings(outFile);
-    }
-
-    outFile.close();
-}
-
 model::Settings view::GameOverView::loadSettings(std::ifstream &inFile) {
     model::Settings settings;
 
@@ -114,14 +122,6 @@ model::Settings view::GameOverView::loadSettings(std::ifstream &inFile) {
     }
 
     return settings;
-}
-
-
-void view::GameOverView::saveSettings(std::ofstream &outFile) {
-    outFile.write(reinterpret_cast<const char*>(&_settings.width), sizeof(_settings.width));
-    outFile.write(reinterpret_cast<const char*>(&_settings.height), sizeof(_settings.height));
-    outFile.write(reinterpret_cast<const char*>(&_settings.colors), sizeof(_settings.colors));
-    outFile.write(reinterpret_cast<const char*>(&_settings.score), sizeof(_settings.score));
 }
 
 int view::GameOverView::getBestScore() {
