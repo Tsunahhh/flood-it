@@ -30,24 +30,25 @@ namespace view {
         std::string FILE_PATH = "saves.bin"; ///< File path for saving/loading game records.
         std::vector<model::Settings> _states; ///< Stores game state records from past plays.
         QVBoxLayout *_layout; ///< Vertical layout for arranging labels and buttons.
-        QHBoxLayout *_buttonLayout; ///< Horizontal layout for arranging buttons.
+        QWidget *_buttonWidget{}; ///< Widget for arranging buttons
+        QHBoxLayout *_buttonLayout{}; ///< Horizontal layout for arranging buttons.
 
-        QLabel *_gameOverLBL; ///< Label to display the "Game Over" message.
-        QLabel *_scoreLBL; ///< Label to display the player's score.
-        QLabel *_recordLBL; ///< Label to display the best score record.
+        QLabel *_gameOverLBL{}; ///< Label to display the "Game Over" message.
+        QLabel *_scoreLBL{}; ///< Label to display the player's score.
+        QLabel *_recordLBL{}; ///< Label to display the best score record.
 
-        QPushButton *_replayBT; ///< Button to allow the player to replay with the same settings.
-        QPushButton *_settingBT; ///< Button to access the settings menu.
-        QPushButton *_leaveBT; ///< Button to leave the game.
+        QPushButton *_replayBT{}; ///< Button to allow the player to replay with the same settings.
+        QPushButton *_settingBT{}; ///< Button to access the settings menu.
+        QPushButton *_leaveBT{}; ///< Button to leave the game.
 
         model::Settings _settings; ///< The current game settings, including the player's score.
 
         /**
          * @brief Retrieves the best score from the recorded states that match the current game's settings.
          *
-         * @return The settings containing the highest score for the current configuration.
+         * @return The highest score for the current configuration.
          */
-        model::Settings getBestScore();
+        int getBestScore();
 
         /**
          * @brief Loads game settings records from a file.

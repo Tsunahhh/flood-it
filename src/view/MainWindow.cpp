@@ -44,6 +44,7 @@ void view::MainWindow::settingsView() {
     connect(_settingsView, &SettingsView::play, this, &MainWindow::playAGame);
     connect(_settingsView, &SettingsView::leave, this, &MainWindow::leave);
     _horizontalLayout->addWidget(_settingsView);
+    setGeometry(QRect(500, 300, 0, 0));
 }
 
 void view::MainWindow::playAGame() {
@@ -88,6 +89,7 @@ void view::MainWindow::gameOverView() {
     connect(_gameOverView, &GameOverView::replay, this, &MainWindow::playAGame);
     connect(_gameOverView, &GameOverView::settings, this, &MainWindow::settingsView);
     connect(_gameOverView, &GameOverView::leave, this, &MainWindow::leave);
+    setGeometry(QRect(500, 300, 0, 0));
 }
 
 void view::MainWindow::updateObs() {

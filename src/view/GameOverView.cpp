@@ -9,38 +9,41 @@
 view::GameOverView::GameOverView(model::Settings settings, QWidget *parent) :
 
 QWidget{parent},
-_settings{std::move(settings)},
+_settings{settings},
 _states{},
 _layout{new QVBoxLayout(this)}
 
 {
     loadSettingsRecords(FILE_PATH);
-    _states.push_back(settings);
-    saveSettingsRecords(FILE_PATH);
     initLBL();
     initBTN();
+    _states.push_back(settings);
+    saveSettingsRecords(FILE_PATH);
 }
 
 void view::GameOverView::initLBL() {
     _gameOverLBL = new QLabel("Partie terminée !", this);
     _gameOverLBL->setAlignment(Qt::AlignCenter);
+    _gameOverLBL->setStyleSheet("font-size: 32px; font-weight: bolder;");
     _layout->addWidget(_gameOverLBL);
 
     std::string scoreStr = "Score: " + std::to_string(_settings.score);
     _scoreLBL = new QLabel(QString::fromStdString(scoreStr), this);
-
     _scoreLBL->setAlignment(Qt::AlignCenter);
+    _scoreLBL->setStyleSheet("font-size: 20px; font-weight: bolder;");
     _layout->addWidget(_scoreLBL);
 
-    model::Settings bestSc = getBestScore();
-    std::string recordStr = "Le record est de " + std::to_string(bestSc.score);
+    int bestSc = getBestScore();
+    std::string recordStr = "Le record est de " + std::to_string(bestSc);
     _recordLBL = new QLabel(QString::fromStdString(recordStr), this);
     _recordLBL->setAlignment(Qt::AlignCenter);
+    _recordLBL->setStyleSheet("font-size: 20px; font-weight: bolder;");
     _layout->addWidget(_recordLBL);
 }
 
 void view::GameOverView::initBTN() {
-    _buttonLayout = new QHBoxLayout(this);
+    _buttonWidget = new QWidget(this);
+    _buttonLayout = new QHBoxLayout(_buttonWidget);
 
     _buttonLayout->setSpacing(5);
     _buttonLayout->setAlignment(Qt::AlignCenter);
@@ -58,7 +61,8 @@ void view::GameOverView::initBTN() {
     connect(_settingBT, &QPushButton::clicked, this, &GameOverView::settings);
     connect(_leaveBT, &QPushButton::clicked, this, &GameOverView::leave);
 
-    _layout->addLayout(_buttonLayout);
+    _buttonWidget->setLayout(_buttonLayout);
+    _layout->addWidget(_buttonWidget);
 }
 
 void view::GameOverView::loadSettingsRecords(const std::string& filename) {
@@ -120,16 +124,16 @@ void view::GameOverView::saveSettings(std::ofstream &outFile) {
     outFile.write(reinterpret_cast<const char*>(&_settings.score), sizeof(_settings.score));
 }
 
-model::Settings view::GameOverView::getBestScore() {
+int view::GameOverView::getBestScore() {
     if (_states.empty()) {
-        return _settings;
+        return _settings.score;
     }
 
-    model::Settings best = _states.at(0);
+    int best = _settings.score;
     for (const model::Settings& st : _states) {
         if (st.height == _settings.height && st.width == _settings.width && st.colors == _settings.colors) {
-            if (best.score < st.score) {
-                best = st;
+            if (best >= st.score) {
+                best = st.score;
             }
         }
     }
