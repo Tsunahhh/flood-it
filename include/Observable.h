@@ -8,6 +8,13 @@
  * @brief Defines the Observable class, which provides an interface for the Observer design pattern.
  */
 
+/**
+ * @namespace utils
+ * @brief Namespace containing all utils files of the Flood It application.
+ *
+ * The `utils` namespace groups all the classes responsible for utils functions
+ * of the game like Observer/able.
+ */
 namespace utils {
 
     /**

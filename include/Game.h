@@ -15,6 +15,13 @@
 #include "Observable.h"
 #include "Settings.h"
 
+/**
+ * @namespace model
+ * @brief Namespace containing all model of the Flood It application.
+ *
+ * The `model` namespace groups all the classes responsible for logic
+ * of the game.
+ */
 namespace model {
 
     /**
