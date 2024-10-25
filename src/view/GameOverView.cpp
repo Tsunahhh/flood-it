@@ -26,14 +26,21 @@ void view::GameOverView::initLBL() {
     _gameOverLBL->setAlignment(Qt::AlignCenter);
     _gameOverLBL->setStyleSheet("font-size: 32px; font-weight: bolder;");
     _layout->addWidget(_gameOverLBL);
+    int bestSc = getBestScore();
 
-    std::string scoreStr = "Score: " + std::to_string(_settings.score);
+    std::string scoreStr;
+    if (bestSc >= _settings.score) {
+        scoreStr = "Tu as battu le record! \n Ton score: " + std::to_string(_settings.score);
+    } else {
+        scoreStr = "Tu n'as pas battu le record! \n Ton score: " + std::to_string(_settings.score);
+    }
+
     _scoreLBL = new QLabel(QString::fromStdString(scoreStr), this);
     _scoreLBL->setAlignment(Qt::AlignCenter);
     _scoreLBL->setStyleSheet("font-size: 20px; font-weight: bolder;");
     _layout->addWidget(_scoreLBL);
 
-    int bestSc = getBestScore();
+
     std::string recordStr = "Le record est de " + std::to_string(bestSc);
     _recordLBL = new QLabel(QString::fromStdString(recordStr), this);
     _recordLBL->setAlignment(Qt::AlignCenter);
