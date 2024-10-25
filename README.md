@@ -7,6 +7,11 @@ Framework Used: **Qt6.7.X**
 
 ## Fonctionnalités
 
+* Choix de la taille entre 2 et 80.
+* Choix du nombre de couleurs entre 3 et 10 inclu.
+* Jeu flood it fonctionnel.
+* Calcule du score.
+* Persistance des records de score du jeu.
 
 
 ## Pré-requis
@@ -32,8 +37,19 @@ Si Qt6 n'est pas encore installé, tu peux le télécharger et l'installer depui
         |->view/
             ->*.cpp
         ->main.cpp
+    |->.Doxyfile
     |->CMakeLists.txt
     |->.gitignore
     |->LICENSE
     |->README.md
 ```
+
+## Doxygen
+
+Pour créer la documentation du projet, un fichier .Doxyfile configuré
+Il va créer automatiquement le dossier documentation et y mettre la doc
+
+> doxygen .Doxyfile
+
+Un fois la documentation créée, il surffit d'aller dans `/documentation/html/index.html`
+pour ouvrir la page principale de documentation.
